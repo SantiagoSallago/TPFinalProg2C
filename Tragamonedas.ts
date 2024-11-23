@@ -1,14 +1,13 @@
 import { Maquina } from "./Maquina";
 
 
-// La clase cuchau está siendo exportada, lo que significa que puede ser importada y utilizada en
+// La clase Tragamonedas está siendo exportada, lo que significa que puede ser importada y utilizada en
 //  otros archivos
 export class Tragamonedas implements Maquina {
     
-
-    private Rodillos: string[];
+    public Rodillos: string[]; // me invito un amigo era de chill
     // Simbolos es una matriz (string[][]) que contiene tres filas, cada una con una serie de símbolos
-    private Simbolos: string[][] = [
+    public Simbolos: string[][] = [
         ['🍒', '🍊', '🍋', '🍉', '🍇'],
         ['🍒', '🍊', '🍋', '🍉', '🍇'],
         ['🍒', '🍊', '🍋', '🍉', '🍇'],
@@ -28,7 +27,7 @@ export class Tragamonedas implements Maquina {
 
         // Mostrar la matriz de símbolos después del giro
         console.log(this.Simbolos);
-        
+
         // Verificar si hay una combinación ganadora
         this.VerificarPremio();
     }
@@ -54,7 +53,7 @@ export class Tragamonedas implements Maquina {
                 }
             }
         }
-        
+        // Si no hay premio, mostrar un mensaje de "No hay premio"
         console.log("No hay premio");
     }
 
@@ -62,15 +61,15 @@ export class Tragamonedas implements Maquina {
 
     
     Apostar(): void {
-        console.log("Apostar");
+        
+        console.log("Apuesta Minima de: $500");
     }
     Retirar(): void {
         console.log("Retirar");
     }
     Tirar(): void {
-        console.log("Tirar");
-    }
-    Deposito(): void {
-        console.log("Deposito");
+        console.log("Efectuando la tirada del dispositivo llamado tragamonedas mi estimado/a..."); 
+        this.Girar();
+        
     }
 }

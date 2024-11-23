@@ -12,28 +12,32 @@ export class Dados {
 }
 
 export class TresDados{
-    private dado1:Dados;
-    private dado2:Dados;
-    private dado3:Dados;
+    private Dado:Dados;
+    
 
     constructor(){
-        this.dado1=new Dados();
-        this.dado2=new Dados();
-        this.dado3=new Dados();
+        this.Dado=new Dados();
+        
     }
-
+    
     tirarYsumar():void{
-        const resultado1=this.dado1.tirar()
-        const resultado2=this.dado2.tirar()
-        const resultado3=this.dado3.tirar()
+        let resultado:number[]=[];
+        resultado.push(this.Dado.tirar())
+        resultado.push(this.Dado.tirar())
+        resultado.push(this.Dado.tirar())
+        
 
+        console.log("resultado de los dado 🎲:")
+        console.table(resultado)
+        
+        let suma:number=0 // <--- Almacenar la suma de los valores que salgan en los dados
 
-        console.log(`resultado del dado 1: ${resultado1}`)
-        console.log(`resultado del dado 2: ${resultado2}`)
-        console.log(`resultado del dado 3: ${resultado3}`)
-
-        return console.log(`El resultado de los Dados 🎲 : `,resultado1+ resultado2+ resultado3);
-         
+        resultado.forEach(element => {        
+           suma += element // <----  Cada vuelta  se suma el valor del dado en esa posicion.
+        });
+        
+        console.log(`La suma de todos los resultados es de: ${suma} `)
+       
     }
 
 }
