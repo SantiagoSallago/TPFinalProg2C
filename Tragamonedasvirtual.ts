@@ -35,7 +35,6 @@ export class TragamonedasVirtual extends Tragamonedas {
 
 
     Apostar(): void {
-        
         console.log("Apuesta Minima de: $500");
     }
     Retirar(): void {

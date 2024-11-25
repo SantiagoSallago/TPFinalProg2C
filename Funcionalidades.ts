@@ -49,6 +49,7 @@ function main() {
         let tragamonedasRodillos = new Tragamonedas();
         let tragamonedasProgresivo = new TragamonedasProgresivo();
         let tragamonedasVirtual = new TragamonedasVirtual(3);
+        let TresDados1 = new TresDados();
         let flag: boolean = true;
         while(flag == true){
             console.log()
@@ -58,7 +59,7 @@ function main() {
         let menu = parseInt(readlineSync.question())
         
         switch(menu){
-            case 1: console.log(" |                     Tragamoneda                        |")
+            case 1: console.log(" |                     Tragamoneda                        | ")
                 console.log(`
                     1.Tragamonedas de Rodillo
                     2.Tragamonedas Virtual 4k
@@ -70,10 +71,8 @@ function main() {
                     switch (menu) {
                         case 1:
                             Tragamoneda(Saldo, tragamonedasRodillos);
-
                             break;
                         case 2:
-                            
                             Tragamoneda(Saldo, tragamonedasVirtual);
                             break;
                         case 3:
@@ -85,14 +84,12 @@ function main() {
 
                     }
                     break;
-
-
-            case 2: console.log(" |                     Dados                     |")
-                    let dados = new TresDados();
-                    dados.tirarYsumar();
+            case 2: console.log(" |                     Dados                     | ")
+                    // Dados(Saldo, TresDados1);
+                    TresDados1.tirarYsumar();
                     break;
 
-            case 3: console.log(" |                     Ruleta                     |")
+            case 3: console.log(" |                     Ruleta                     | ")
                     let ruleta = new Ruleta();
                     ruleta.girar();
                     break;
@@ -106,8 +103,6 @@ function main() {
 }
 
 function Tragamoneda(Saldo:number, clase:Tragamonedas) : number{
-    
-    
     let continuar : boolean = true
     while (continuar) {
         console.log(`
@@ -142,5 +137,8 @@ function Tragamoneda(Saldo:number, clase:Tragamonedas) : number{
         return Saldo;
     }
         
+// function Dados(Saldo:number, clase:Dados) : number{
+    
+// }
 
 main();
