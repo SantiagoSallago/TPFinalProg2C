@@ -1,9 +1,13 @@
-export class Ruleta {;
+import { Sala } from "./Sala";
+
+export class Ruleta extends Sala {
+    MontoMinimo = 1000;
     private numeros:{numero:number,color:string}[];
 
 
 
     constructor(){
+        super(); 
         this.numeros=[
             { numero: 0, color: '🍀 Verde' },
             { numero: 32, color: '🔴 Rojo' },
@@ -36,11 +40,25 @@ export class Ruleta {;
            ];
     }
 
-    girar():void {
-        const indiceAleatorio=Math.floor(Math.random()*this.numeros.length);
+    getColor(numero:number): string{
+        let resultado:string="";
 
-        const resultado=this.numeros[indiceAleatorio];
+        this.numeros.map(e => {
+            console.log(e.numero)
+
+            if (e.numero === numero) {
+                resultado = e.color;
+            } 
+        });
+
         
-        console.log(`Ha salido el numero ${resultado.numero} (${resultado.color})`);
+        
+        return resultado
+    }
+    
+    Tirar():number {
+       let indiceAleatorio = Math.floor(Math.random()*this.numeros.length);
+       
+       return indiceAleatorio;
     }
 }

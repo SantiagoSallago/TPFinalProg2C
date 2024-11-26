@@ -1,30 +1,33 @@
-export class Dados {
+import { Sala } from "./Sala";
+
+export class Dados{
     private caras:number;
 
-    constructor(caras:number=6){
-        this.caras=caras;
+    constructor(){
+        this.caras=6;
     }
 
-    tirar():number{
-
+    Tirar():number{
         return Math.floor(Math.random()*this.caras) +1;
     }
 }
 
-export class TresDados{
+export class TresDados extends Sala{
+    MontoMinimo = 500;
     private Dado:Dados;
     
 
     constructor(){
+        super();
         this.Dado=new Dados();
         
     }
     
-    tirarYsumar():void{
+    Tirar(): number{
         let resultado:number[]=[];
-        resultado.push(this.Dado.tirar())
-        resultado.push(this.Dado.tirar())
-        resultado.push(this.Dado.tirar())
+        resultado.push(this.Dado.Tirar())
+        resultado.push(this.Dado.Tirar())
+        resultado.push(this.Dado.Tirar())
         
 
         console.log("resultado de los dado 🎲:")
@@ -37,8 +40,8 @@ export class TresDados{
         });
         
         console.log(`La suma de todos los resultados es de: ${suma} `)
-       
+        return suma;
     }
-
+   
 }
 

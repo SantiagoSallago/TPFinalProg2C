@@ -1,14 +1,17 @@
 import * as readlineSync from 'readline-sync';
-import { Tragamonedas } from './Tragamonedas';
-import { Dados, TresDados } from './Dados';
+import { Sala } from './Sala';
+import { TresDados } from './Dados';
 import { Ruleta } from './Ruleta';
 import { TragamonedasVirtual } from './Tragamonedasvirtual';
 import { TragamonedasProgresivo } from './TragamonedasProgresivo';
 
 function main() {
     console.log("Bienvenido al casino virtual 'DEJANOS TU PLATA'")
-    
-    let Saldo = readlineSync.questionInt('Monto a depositar: ');
+    let Saldo:number = 0;
+
+    while (Saldo < 1000){
+        Saldo = readlineSync.questionInt('Monto a depositar (+1000): ');
+    }
     let opcion: number;
     let continuar : boolean = true
     while (continuar) {
@@ -18,7 +21,6 @@ function main() {
             1. Elegir Juego
             2. Verificar Monto
             3. Agregar Saldo
-            
             4. Salir
             `);
             opcion = readlineSync.questionInt()
@@ -30,8 +32,8 @@ function main() {
                         console.log(`Su saldo es de $${Saldo}.`)
                         break;
                         case 3:
-                            let monto = readlineSync.questionInt(`Cuanto dinero quiere agregar? `)
-                            if (monto > 0) {
+                            let monto = readlineSync.questionInt(`Cuanto dinero quiere agregar? (+1000)`)
+                            if (monto > 1000) {
                                 console.log("Saldo agregado exitosamente.")
                                 Saldo += monto
                             }
@@ -46,10 +48,12 @@ function main() {
     
     
     function Juego(Saldo):number {
-        let tragamonedasRodillos = new Tragamonedas();
+        
         let tragamonedasProgresivo = new TragamonedasProgresivo();
-        let tragamonedasVirtual = new TragamonedasVirtual(3);
+        let tragamonedasVirtual = new TragamonedasVirtual();
         let TresDados1 = new TresDados();
+        let ruleta = new Ruleta();
+
         let flag: boolean = true;
         while(flag == true){
             console.log()
@@ -61,37 +65,35 @@ function main() {
         switch(menu){
             case 1: console.log(" |                     Tragamoneda                        | ")
                 console.log(`
-                    1.Tragamonedas de Rodillo
-                    2.Tragamonedas Virtual 4k
-                    3.Tragamonedas Progresivo
-                    4.Salir
+                    1.Tragamonedas Virtual 4k
+                    2.Tragamonedas Progresivo
+                    3.Salir
                     `);
-                    menu = readlineSync.questionInt("A que tragamonedas desea jugar? ")
+                    menu = parseInt(readlineSync.questionInt("A que tragamonedas desea jugar? "))
                 
                     switch (menu) {
                         case 1:
-                            Tragamoneda(Saldo, tragamonedasRodillos);
+                            juegoCasino(Saldo, tragamonedasVirtual);
                             break;
                         case 2:
-                            Tragamoneda(Saldo, tragamonedasVirtual);
+                            juegoCasino(Saldo, tragamonedasProgresivo);
                             break;
                         case 3:
-                            Tragamoneda(Saldo, tragamonedasProgresivo);
-                            break;
-                        case 4:
                             console.log('Saliendo del Tragamonedas');
                             break;
 
                     }
                     break;
             case 2: console.log(" |                     Dados                     | ")
-                    // Dados(Saldo, TresDados1);
-                    TresDados1.tirarYsumar();
+                    juegoCasino(Saldo, TresDados1);
                     break;
 
-            case 3: console.log(" |                     Ruleta                     | ")
-                    let ruleta = new Ruleta();
-                    ruleta.girar();
+            case 3: console.log(" |                     Ruleta                     | ")     
+                    console.log()
+                    let numero = ruleta.Tirar();
+                    console.log(`Ha salido el numero ${numero} (${ruleta.getColor(numero)})`);
+                    console.log()
+                    console.log()
                     break;
 
             default: console.log("Gracias por utilizar el casino!")
@@ -101,9 +103,12 @@ function main() {
     }
     return Saldo;
 }
-
-function Tragamoneda(Saldo:number, clase:Tragamonedas) : number{
+// Se crea una funcion a a la cual se le pasa por parametro el Saldo de la persona y la clase(Juego seleccionado)
+function juegoCasino(Saldo:number, clase: Sala) : number{
     let continuar : boolean = true
+
+
+    //  while para iterar
     while (continuar) {
         console.log(`
             1. Ver Monto Minimo de Apuesta
@@ -111,15 +116,20 @@ function Tragamoneda(Saldo:number, clase:Tragamonedas) : number{
             3. Salir
             `);
         let menu = readlineSync.questionInt('Proceda: ')
+
         switch(menu){
             case 1:
-                clase.Apostar();
+        
+                console.log(`El monto minimo de apuesta es de: $${clase.getMontoMinimo()}`);
+                
+            
                 break;
                 case 2:
                     let apuesta = readlineSync.questionInt('Cuanto desea apostar? ')
-                    if (apuesta >= 500) {
+                    if (apuesta >= clase.getMontoMinimo()) {
                         Saldo -= apuesta;
-                        clase.Tirar();
+                        Saldo += clase.Tirar(apuesta); //--- se suma el resultado de la apuesta
+                        console.log(Saldo);
                         console.log('Su saldo es de: '+ Saldo);
                     } else {
                         console.log('Ingrese una apuesta mayor o igual a $500');
@@ -137,8 +147,5 @@ function Tragamoneda(Saldo:number, clase:Tragamonedas) : number{
         return Saldo;
     }
         
-// function Dados(Saldo:number, clase:Dados) : number{
-    
-// }
 
 main();
