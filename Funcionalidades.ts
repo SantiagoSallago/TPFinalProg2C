@@ -90,11 +90,27 @@ function main() {
 
             case 3: console.log(" |                     Ruleta                     | ")     
                     console.log();
-                    let numeroRuleta = readlineSync.questionInt("Por cual numero desea apostar? ")
-                    let apuestaRuleta = readlineSync.questionInt("Cuanto dinero quiere apostar? ")
-                    if (numeroRuleta !== undefined && apuestaRuleta >= ruleta.getMontoMinimo()) {
-                        let resultado = ruleta.Tirar();
-                        ruleta.verificarPremio(numeroRuleta, apuestaRuleta, resultado)
+                    let continuar = true
+                    while (continuar) {
+                        let numeroRuleta = readlineSync.questionInt("Por cual numero desea apostar? ")
+                        let apuestaRuleta = readlineSync.questionInt("Cuanto dinero quiere apostar? ")
+                        if (numeroRuleta !== undefined && apuestaRuleta >= ruleta.getMontoMinimo()) {
+                            let resultado = ruleta.Tirar();
+                            ruleta.verificarPremio(numeroRuleta, apuestaRuleta, resultado)
+                        }
+                        let opcionRuleta : string = ""
+                        while (opcionRuleta !== undefined) {
+                            opcionRuleta = readlineSync.question('Desea continuar? ')
+                            if (opcionRuleta == "Si") {
+                                continuar = true
+                                break;
+                            } else {
+                                console.log("Gracias por jugar!");
+                                continuar = false;
+                                break;
+                            }
+                                
+                        }                        
                     }
                     console.log()
                     console.log()
