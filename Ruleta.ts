@@ -74,7 +74,7 @@ export class Ruleta extends Sala {
                 
                 ganancia = apuesta * this.multiplicador;
             } else {
-                console.log("La casa siempre gana");
+                console.log("Perdiste. No hay premio.");
                 ganancia = 0
             }
         return ganancia;
