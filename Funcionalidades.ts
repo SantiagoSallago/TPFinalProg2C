@@ -69,7 +69,7 @@ function main() {
                     2.Tragamonedas Progresivo
                     3.Salir
                     `);
-                    menu = parseInt(readlineSync.questionInt("A que tragamonedas desea jugar? "))
+                    menu = parseInt(readlineSync.question("A que tragamonedas desea jugar? "))
                 
                     switch (menu) {
                         case 1:
@@ -89,9 +89,13 @@ function main() {
                     break;
 
             case 3: console.log(" |                     Ruleta                     | ")     
-                    console.log()
-                    let numero = ruleta.Tirar();
-                    console.log(`Ha salido el numero ${numero} (${ruleta.getColor(numero)})`);
+                    console.log();
+                    let numeroRuleta = readlineSync.questionInt("Por cual numero desea apostar? ")
+                    let apuestaRuleta = readlineSync.questionInt("Cuanto dinero quiere apostar? ")
+                    if (numeroRuleta !== undefined && apuestaRuleta >= ruleta.getMontoMinimo()) {
+                        let resultado = ruleta.Tirar();
+                        ruleta.verificarPremio(numeroRuleta, apuestaRuleta, resultado)
+                    }
                     console.log()
                     console.log()
                     break;
