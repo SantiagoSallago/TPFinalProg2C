@@ -2,7 +2,7 @@ import { Sala } from "./Sala";
 
 export class Ruleta extends Sala {
     MontoMinimo = 1000;
-    multiplicador = 1.5;
+    multiplicador = 2;
     private numeros:{numero:number,color:string}[];
 
 
