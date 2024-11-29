@@ -101,7 +101,7 @@ function main() {
                         let opcionRuleta : string = ""
                         while (opcionRuleta !== undefined) {
                             opcionRuleta = readlineSync.question('Desea continuar? ')
-                            if (opcionRuleta == "Si") {
+                            if (opcionRuleta.toLowerCase() == "si") {
                                 continuar = true
                                 break;
                             } else {
