@@ -6,7 +6,7 @@ import { TragamonedasVirtual } from './Tragamonedasvirtual';
 import { TragamonedasProgresivo } from './TragamonedasProgresivo';
 
 function main() {
-    console.log("Bienvenido al casino virtual 'DEJANOS TU PLATA'")
+    console.log("Bienvenido al casino virtual!")
     let Saldo:number = 0;
 
     while (Saldo < 1000){
