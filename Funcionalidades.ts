@@ -28,19 +28,19 @@ function main() {
                 case 1:
                     Juego(Saldo);     
                     break;
-                    case 2:
-                        console.log(`Su saldo es de $${Saldo}.`)
-                        break;
-                        case 3:
-                            let monto = readlineSync.questionInt(`Cuanto dinero quiere agregar? (+1000)`)
-                            if (monto > 1000) {
-                                console.log("Saldo agregado exitosamente.")
-                                Saldo += monto
-                            }
-                            break;
-                            case 4:
-                                console.log("Saliendo del programa, muchas gracias por visitar el casino!")
-                                continuar = false;
+                case 2:
+                    console.log(`Su saldo es de $${Saldo}.`)
+                    break;
+                case 3:
+                    let monto = readlineSync.questionInt(`Cuanto dinero quiere agregar? (+1000): `)
+                    if (monto > 1000) {
+                        console.log("Saldo agregado exitosamente.")
+                        Saldo += monto
+                    }
+                    break;
+                case 4:
+                    console.log("Saliendo del programa, muchas gracias por visitar el casino!")
+                    continuar = false;
                 break;
             }
         }
@@ -63,62 +63,63 @@ function main() {
         let menu = parseInt(readlineSync.question())
         
         switch(menu){
-            case 1: console.log(" |                     Tragamoneda                        | ")
+            case 1: 
+                console.log(" |                     Tragamoneda                        | ")
                 console.log(`
                     1.Tragamonedas Virtual 4k
                     2.Tragamonedas Progresivo
                     3.Salir
                     `);
-                    menu = parseInt(readlineSync.question("A que tragamonedas desea jugar? "))
-                
-                    switch (menu) {
-                        case 1:
-                            juegoCasino(Saldo, tragamonedasVirtual);
-                            break;
-                        case 2:
-                            juegoCasino(Saldo, tragamonedasProgresivo);
-                            break;
-                        case 3:
-                            console.log('Saliendo del Tragamonedas');
-                            break;
+                menu = parseInt(readlineSync.question("A que tragamonedas desea jugar? "))
+            
+                switch (menu) {
+                    case 1:
+                        juegoCasino(Saldo, tragamonedasVirtual);
+                        break;
+                    case 2:
+                        juegoCasino(Saldo, tragamonedasProgresivo);
+                        break;
+                    case 3:
+                        console.log('Saliendo del Tragamonedas');
+                        break;
+                }
+                break;
+            case 2: 
+                console.log(" |                     Dados                     | ")
+                juegoCasino(Saldo, TresDados1);
+                break;
 
+            case 3: 
+                console.log(" |                     Ruleta                     | ")     
+                console.log();
+                let continuar = true
+                while (continuar) {
+                    let numeroRuleta = readlineSync.questionInt("Por cual numero desea apostar? ")
+                    let apuestaRuleta = readlineSync.questionInt("Cuanto dinero quiere apostar? ")
+                    if (numeroRuleta !== undefined && apuestaRuleta >= ruleta.getMontoMinimo()) {
+                        let resultado = ruleta.Tirar();
+                        ruleta.verificarPremio(numeroRuleta, apuestaRuleta, resultado)
                     }
-                    break;
-            case 2: console.log(" |                     Dados                     | ")
-                    juegoCasino(Saldo, TresDados1);
-                    break;
-
-            case 3: console.log(" |                     Ruleta                     | ")     
-                    console.log();
-                    let continuar = true
-                    while (continuar) {
-                        let numeroRuleta = readlineSync.questionInt("Por cual numero desea apostar? ")
-                        let apuestaRuleta = readlineSync.questionInt("Cuanto dinero quiere apostar? ")
-                        if (numeroRuleta !== undefined && apuestaRuleta >= ruleta.getMontoMinimo()) {
-                            let resultado = ruleta.Tirar();
-                            ruleta.verificarPremio(numeroRuleta, apuestaRuleta, resultado)
+                    let opcionRuleta : string;
+                    while (opcionRuleta !== undefined) {
+                        opcionRuleta = readlineSync.question('Desea continuar? ')
+                        if (opcionRuleta.toLowerCase() == "si") {
+                            continuar = true
+                            break;
+                        } else {
+                            console.log("Gracias por jugar!");
+                            continuar = false;
+                            break;
                         }
-                        let opcionRuleta : string = ""
-                        while (opcionRuleta !== undefined) {
-                            opcionRuleta = readlineSync.question('Desea continuar? ')
-                            if (opcionRuleta.toLowerCase() == "si") {
-                                continuar = true
-                                break;
-                            } else {
-                                console.log("Gracias por jugar!");
-                                continuar = false;
-                                break;
-                            }
-                                
-                        }                        
-                    }
-                    console.log()
-                    console.log()
-                    break;
+                    }                        
+                }
+                console.log()
+                break;
 
-            default: console.log("Gracias por utilizar el casino!")
-                     flag = false;
-                     break;
+            default: 
+                console.log("Gracias por utilizar el casino!")
+                flag = false;
+                break;
         }
     }
     return Saldo;
@@ -126,7 +127,6 @@ function main() {
 // Se crea una funcion a a la cual se le pasa por parametro el Saldo de la persona y la clase(Juego seleccionado)
 function juegoCasino(Saldo:number, clase: Sala) : number{
     let continuar : boolean = true
-
 
     //  while para iterar
     while (continuar) {
@@ -139,30 +139,27 @@ function juegoCasino(Saldo:number, clase: Sala) : number{
 
         switch(menu){
             case 1:
-        
                 console.log(`El monto minimo de apuesta es de: $${clase.getMontoMinimo()}`);
-                
-            
                 break;
-                case 2:
-                    let apuesta = readlineSync.questionInt('Cuanto desea apostar? ')
-                    if (apuesta >= clase.getMontoMinimo()) {
-                        Saldo -= apuesta;
-                        Saldo += clase.Tirar(apuesta); //--- se suma el resultado de la apuesta
-                        console.log(Saldo);
-                        console.log('Su saldo es de: '+ Saldo);
-                    } else {
-                        console.log('Ingrese una apuesta mayor o igual a $500');
-                    }
-                    break;
-                case 3:
-                    console.log('Saliendo del tragamonedas...')
-                    continuar = false
-                    break;
-                default:
-                    console.log("Opción invalida.");
-                    break;
+            case 2:
+                let apuesta = readlineSync.questionInt('Cuanto desea apostar? ')
+                if (apuesta >= clase.getMontoMinimo()) {
+                    Saldo -= apuesta;
+                    Saldo += clase.Tirar(apuesta); //--- se suma el resultado de la apuesta
+                    console.log(Saldo);
+                    console.log('Su saldo es de: '+ Saldo);
+                } else {
+                    console.log('Ingrese una apuesta mayor o igual a $500');
                 }
+                break;
+            case 3:
+                console.log('Saliendo del tragamonedas...')
+                continuar = false
+                break;
+            default:
+                console.log("Opción invalida.");
+                break;
+            }
             }
         return Saldo;
     }
