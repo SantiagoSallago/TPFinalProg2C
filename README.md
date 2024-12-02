@@ -1,8 +1,8 @@
 # Trabajo practico Final.
 
-### En este repositorio se encuentra el codigo que integra el contenido de todo el año 😎
+### En este repositorio se encuentra un codigo que integra el contenido aprendido 😎
 
-### Clickee los ojos para ir a la documentación! ↙
+### ↘ Clickee los ojos para ir a la documentación!    
    - [👀](https://drive.google.com/drive/folders/1eBoOrdlsgbv8EOtGcehIDNuveIlrM33Q)
 
 ### Alumnos:
