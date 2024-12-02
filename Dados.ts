@@ -23,7 +23,7 @@ export class TresDados extends Sala{
         
     }
     
-    Tirar(): number{
+    Tirar(apuesta:number): number{
         let resultado:number[]=[];
         resultado.push(this.Dado.Tirar())
         resultado.push(this.Dado.Tirar())
@@ -40,7 +40,18 @@ export class TresDados extends Sala{
         });
         
         console.log(`La suma de todos los resultados es de: ${suma} `)
-        return suma;
+
+        // si la suma de los dados es Mayor o igual a 12, que es 2/3 de los 18 (maximo valor) se gana
+        if (suma >= 12){
+            console.log("Ganaste 💰")
+            return apuesta * 2;
+        }
+        else{
+            console.log("Perdio la apuesta ( 😥 )")
+            return 0;
+        }
+
+       
     }
    
 }
