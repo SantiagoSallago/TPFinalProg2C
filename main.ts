@@ -94,12 +94,28 @@ function main() {
                 console.log();
                 let continuar = true
                 while (continuar) {
-                    let numeroRuleta = readlineSync.questionInt("Por cual numero desea apostar? ")
-                    let apuestaRuleta = readlineSync.questionInt("Cuanto dinero quiere apostar? ")
-                    if (numeroRuleta !== undefined && apuestaRuleta >= ruleta.getMontoMinimo()) {
-                        let resultado = ruleta.Tirar();
-                        ruleta.verificarPremio(numeroRuleta, apuestaRuleta, resultado)
+                    let numeroRuleta = readlineSync.questionInt("Por cual numero desea apostar? (0-36): " )
+                    if (numeroRuleta <0 || numeroRuleta > 36){
+                        console.log("Ingrese un numero valido");
+                        break
                     }
+                    
+                    let apuestaRuleta = readlineSync.questionInt("Cuanto dinero quiere apostar? ")
+                    if (apuestaRuleta <= ruleta.getMontoMinimo()){
+                        console.log("Ingrese un monto mayor o igual a "+ ruleta.getMontoMinimo());
+                        break
+                    }
+                          
+                    if (numeroRuleta >= 0 && numeroRuleta <= 36 && apuestaRuleta >= ruleta.getMontoMinimo()) {
+                        //-------- Resto apuesta y tiro la ruleta
+                        Saldo -= apuestaRuleta;
+                        let resultado = ruleta.Tirar();
+
+                        // ---------- verifico resultado
+                        Saldo += ruleta.verificarPremio(numeroRuleta, apuestaRuleta, resultado)
+                        console.log("Saldo actual: " + Saldo);
+                    }
+
                     let opcionRuleta : string;
                     while (opcionRuleta !== undefined) {
                         opcionRuleta = readlineSync.question('Desea continuar? ')
